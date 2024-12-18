@@ -18,25 +18,21 @@
 
 </head>
 <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        margin: 0;
-    }
-
 /* Navbar fixed di atas */
 nav {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000; /* Pastikan navbar di atas konten lainnya */
+    padding: 10px 0; /* Sesuaikan padding navbar */
 }
 
 /* Footer fixed di bawah */
 footer {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     background-color: #FFA726;
     text-align: center;
@@ -46,19 +42,23 @@ footer {
     z-index: 1000; /* Pastikan footer tetap di atas konten lainnya */
 }
 
-
-
-    /* Mengatur margin dan padding agar jarak antara elemen lebih rapat */
-    #Home {
-        background-image: url(bg.jpg);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 100%;
-        width: 100%;
-        display: flex;
+/* Konten utama agar tidak tertutup navbar dan footer */
+#Home {
     padding-top: 60px; /* Sesuaikan dengan tinggi navbar */
     padding-bottom: 60px; /* Sesuaikan dengan tinggi footer */
+    background-image: url(bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Agar konten tetap mengisi layar */
+}
+
+/* Agar konten utama tetap mengisi sisa ruang di bawah navbar dan di atas footer */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 
