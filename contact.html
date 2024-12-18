@@ -45,8 +45,9 @@ footer {
     min-height: calc(100vh - 60px); /* Subtract navbar height */
     background-color: #ddd;
     margin-top: 60px;
+    flex-grow: 1; /* Pastikan elemen konten utama mengambil ruang yang tersisa */
     padding-top: 100px; /* Adjust for the navbar height */
-    padding-bottom: 50px; /* Adjust for the footer height */
+    padding-bottom: 70px; /* Adjust for the footer height */
 }
 
 
@@ -243,7 +244,7 @@ footer {
 </style>
 
 <body class="flex flex-col min-h-screen">
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col flex-grow">
         <!-- Navbar -->
         <nav class="bg-yellow-400 shadow-md">
             <div class="mx-auto flex items-center justify-between px-4 py-3">
