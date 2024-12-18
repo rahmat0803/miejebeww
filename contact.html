@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <style>
-    body {
-        z-index: 1;
-        overflow: hidden;
-
-
-    }
-
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden; /* pastikan tidak ada overflow horizontal */
+}
     .nav {
         position: sticky;
         /* Menjadikan navbar tetap di atas */
@@ -30,18 +30,15 @@
         /* Agar navbar muncul di atas elemen lainnya */
     }
 
-    .footer {
-        margin-top: auto;
-        /* Tetap di bagian bawah */
-        padding: 10px 0;
-        /* Jarak atas dan bawah footer */
-        background-color: #FFB300;
-        /* Warna kuning */
-        color: white;
-        /* Warna teks */
-        text-align: center;
-    }
-
+ 
+footer {
+    margin-top: auto;
+    /* Mengatur agar footer tetap di bawah halaman */
+    padding: 10px 0;
+    background-color: #FFB300;
+    color: white;
+    text-align: center;
+}
 
 
     /* Contact Section */
