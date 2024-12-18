@@ -30,24 +30,19 @@ body {
     }
 
  
+.section {
+    flex: 1; /* Pastikan bagian utama mengisi ruang di antara header dan footer */
+    background-color: #ddd;
+    padding-top: 100px;
+    padding-bottom: 70px; /* Hindari margin manual */
+}
+
 footer {
-    margin-top: auto; /* Ensures footer stays at the bottom */
+    flex-shrink: 0; /* Jangan biarkan footer mengecil */
     padding: 10px 0;
     background-color: #FFB300;
     color: white;
     text-align: center;
-}
-
-
-
-   .section {
-    width: 100%;
-    min-height: calc(100vh - 60px); /* Subtract navbar height */
-    background-color: #ddd;
-    margin-top: 60px;
-    flex-grow: 1; /* Pastikan elemen konten utama mengambil ruang yang tersisa */
-    padding-top: 100px; /* Adjust for the navbar height */
-    padding-bottom: 70px; /* Adjust for the footer height */
 }
 
 
