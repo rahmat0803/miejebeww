@@ -22,7 +22,9 @@
     flex-direction: column;
     min-height: 100vh;
 
-
+main {
+    flex: 1; /* Konten utama akan mengisi ruang kosong */
+}
     }
 
     .nav {
@@ -34,17 +36,10 @@
         /* Agar navbar muncul di atas elemen lainnya */
     }
 
-    .footer {
-        margin-top: auto;
-        /* Tetap di bagian bawah */
-        padding: 10px 0;
-        /* Jarak atas dan bawah footer */
-        background-color: #FFB300;
-        /* Warna kuning */
-        color: white;
-        /* Warna teks */
-        text-align: center;
-    }
+footer {
+    position: relative;
+    z-index: 10;
+}
 
 
 
@@ -210,10 +205,7 @@
             padding: 10px 0;
         }
 
-        nav .lg\\:flex {
-            display: none;
-            /* Sembunyikan menu desktop di layar kecil */
-        }
+     
 
         #sidebar {
             width: 100%;
