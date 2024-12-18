@@ -19,7 +19,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    overflow-x: hidden; /* pastikan tidak ada overflow horizontal */
+    overflow-x: hidden;
 }
     .nav {
         position: sticky;
@@ -32,8 +32,7 @@ body {
 
  
 footer {
-    margin-top: auto;
-    /* Mengatur agar footer tetap di bawah halaman */
+    margin-top: auto; /* Ensures footer stays at the bottom */
     padding: 10px 0;
     background-color: #FFB300;
     color: white;
@@ -41,14 +40,14 @@ footer {
 }
 
 
-    /* Contact Section */
-    .contact-section {
-        padding-top: 50px;
-        /* Kurangi jarak atas */
-        padding-bottom: 200px;
-        /* Tetapkan jarak bawah */
-        background-color: #FFECB3;
-    }
+   .section {
+    width: 100%;
+    min-height: calc(100vh - 60px); /* Subtract navbar height */
+    background-color: #ddd;
+    margin-top: 60px;
+    padding-top: 100px; /* Adjust for the navbar height */
+    padding-bottom: 50px; /* Adjust for the footer height */
+}
 
 
 
