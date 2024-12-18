@@ -9,14 +9,18 @@
 
     <!-- Link ke Tailwind CSS -->
 
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+
     <!-- Link ke Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <style>
     body {
         z-index: 1;
-        overflow: hidden;
+        overflow: auto;
+          display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
 
     }
@@ -199,6 +203,8 @@
         }
 
         footer {
+           
+        display: none; /* Pastikan ini tidak ada */
             font-size: 0.9rem;
             /* Ukuran font lebih kecil */
             padding: 10px 0;
@@ -334,9 +340,11 @@
 
 
         <!-- Footer -->
-        <footer class="bg-yellow-600 text-white text-center py-4 shadow-md">
-            <p>&copy; 2024 Website mie jebew</p>
-        </footer>
+      <footer class="bg-yellow-600 text-white text-center py-4 shadow-md w-full">
+    <p>&copy; 2024 Website mie jebew</p>
+</footer>
+
+       
         <script>
             // JavaScript to toggle the sidebar
             const menuToggle = document.getElementById("menu-toggle");
