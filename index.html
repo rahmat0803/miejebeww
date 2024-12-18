@@ -25,18 +25,27 @@
         margin: 0;
     }
 
-    footer {
-        footer {
-    margin-top: 10px; /* Hapus auto agar tidak mengganggu */
+/* Navbar fixed di atas */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Pastikan navbar di atas konten lainnya */
 }
 
-        background-color: #FFA726;
-        /* Warna kuning-oranye sesuai tema */
-        text-align: center;
-        padding: 10px 0;
-        color: white;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    }
+/* Footer fixed di bawah */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFA726;
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Pastikan footer tetap di atas konten lainnya */
+}
+
 
 
     /* Mengatur margin dan padding agar jarak antara elemen lebih rapat */
@@ -48,9 +57,13 @@
         height: 100%;
         width: 100%;
         display: flex;
+    padding-top: 60px; /* Sesuaikan dengan tinggi navbar */
+    padding-bottom: 60px; /* Sesuaikan dengan tinggi footer */
+}
 
 
-    }
+
+    
 
     #Home h1 {
         font-size: 3rem;
