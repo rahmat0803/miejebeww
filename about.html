@@ -46,23 +46,14 @@
         /* Tambahkan scroll jika konten panjang */
     }
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    overflow-x: hidden; /* pastikan tidak ada overflow horizontal */
-}
 
-footer {
-    margin-top: auto;
-    /* Mengatur agar footer tetap di bawah halaman */
-    padding: 10px 0;
-    background-color: #FFB300;
-    color: white;
-    text-align: center;
-}
-
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
 
     .section {
         width: 100%;
