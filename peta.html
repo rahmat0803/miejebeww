@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mie jebew Website</title>
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        html,
+        body {
+
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* Mencegah scrolling */
+        }
+
+        /* Mengatur tinggi peta untuk mengisi ruang yang tersedia */
+        #map {
+            height: calc(100% - 150px);
+            /* Sesuaikan dengan tinggi navbar dan footer */
+            z-index: 1;
+
+        }
+    </style>
+</head>
+
+<body style="overflow: hidden;" class="bg-black text-gray-800 font-sans flex flex-col">
+    <div class="flex flex-col h-full">
+        <!-- Navbar -->
+        <nav class="bg-yellow-400 shadow-md">
+            <div class=" mx-auto flex items-center justify-between px-4 py-3">
+                <h3 class="font-semibold text-2xl text-white">
+                    <em>Mie jebew</em>
+                </h3>
+                <button class="focus:outline-none lg:hidden" id="menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="65" viewBox="0 0 50 50">
+                        <path
+                            d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="hidden lg:flex lg:items-center">
+                    <a href="index.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Home</a>
+                    <a href="about.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">About</a>
+                    <a href="menu.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Menu</a>
+                    <a href="peta.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Map</a>
+                    <a href="contact.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar for Mobile -->
+        <div id="sidebar" class="fixed inset-0  z-50 hidden">
+            <div style="background-color: orange;" class="flex flex-col h-full w-64  p-4">
+                <button id="close-sidebar" class="text-white mb-4">Close</button>
+                <a href="index.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="about.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-info-circle mr-2"></i> About
+                </a>
+                <a href="menu.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-utensils mr-2"></i> Menu
+                </a>
+                <a href="peta.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-map mr-2"></i> Map
+                </a>
+                <a href="contact.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-phone mr-2"></i> Contact
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-grow flex flex-col items-center justify-center p-6">
+            <!-- Map Section -->
+            <div style="height: 100%;" id="map" class="w-full rounded-lg shadow-lg mb-6"></div>
+            <!-- Peta dengan lebar dan tinggi penuh -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-yellow-600 text-white text-center py-4 shadow-md">
+            <p>&copy; 2024 Website mie jebew</p>
+        </footer>
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+        <!-- JavaScript -->
+        <script>
+            // JavaScript to toggle the sidebar
+            const menuToggle = document.getElementById("menu-toggle");
+            const sidebar = document.getElementById("sidebar");
+            const closeSidebar = document.getElementById("close-sidebar");
+
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("hidden");
+            });
+
+            closeSidebar.addEventListener("click", () => {
+                sidebar.classList.add("hidden");
+            });
+
+            // Inisialisasi peta
+            document.addEventListener("DOMContentLoaded", function () {
+                var map = L.map('map', {
+                    center: [-6.115219, 120.462126],
+                    zoom: 18,
+                    minZoom: 10,
+                    maxZoom: 20
+                });
+
+
+                // Lapisan Peta OSM
+                const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+
+
+                // Menambahkan kontrol layer
+                const baseMaps = {
+                    "default": map,
+                    "OSM": osmLayer,
+                };
+
+
+                // Menambahkan kontrol untuk mengganti mode peta
+                L.control.layers(baseMaps).addTo(map);
+
+
+
+
+
+                // Gaya untuk layer GeoJSON
+                const defaultStyle = {
+                    color: "#f0f0f0",
+                    weight: 1.5,
+                    opacity: 0.8,
+                    fillColor: "#45F450",
+                    fillOpacity: 1,
+                };
+
+                const mesjidIcon = L.icon({
+                    iconUrl: 'mesjid.png',
+                    iconColor: "#350",
+                    iconSize: [25, 25],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30],
+                });
+
+                // Ikon untuk sekolah
+                const sekolahIcon = L.icon({
+                    iconUrl: 'sekolah.png',
+                    iconColor: "#000",
+                    iconSize: [25, 25],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30],
+                });
+
+                // Memuat semua GeoJSON, agar langsung tampil tanpa harus diklik
+                loadGeoJSON("./sekolah.geojson", sekolahIcon);
+                loadGeoJSON("./Mesjid.geojson", mesjidIcon);
+
+                const geojsonFiles = [
+                    {
+                        url: "./BentengUtara.geojson",
+                        style: { color: "#000000", weight: 1.5, opacity: 0.8, fillColor: "rgb(255, 165, 0)", fillOpacity: 0.5 } // Warna hijau.
+                    },
+                    {
+                        url: "./BentengPusat.geojson",
+                        style: { color: "#000000", weight: 1.5, opacity: 0.8, fillColor: "rgb(255, 255, 0)", fillOpacity: 0.5 } // Warna ungu.
+                    },
+                    {
+                        url: "./BentengSelatan.geojson",
+                        style: { color: "#000000", weight: 1.5, opacity: 0.8, fillColor: "rgb(255, 253, 208)", fillOpacity: 0.5 } // Warna pink.
+                    },
+                    {
+                        url: "./jalanBentengku.geojson",
+                        style: { color: "#333", weight: 3, opacity: 1 } // Tidak diubah.
+                    }
+                ];
+
+
+                geojsonFiles.forEach((file) => {
+                    fetch(file.url)
+                        .then((response) => response.json())
+                        .then((geojsonData) => {
+                            L.geoJSON(geojsonData, {
+                                style: file.style,
+                                onEachFeature: function (feature, layer) {
+                                    // Pastikan fitur memiliki obj properties 'nama'
+                                    if (feature.properties && feature.properties.nama) {
+                                        layer.bindPopup(`${feature.properties.nama}`);
+                                    } else {
+                                        console.warn('Fitur tidak memiliki properti "nama":', feature);
+                                    }
+                                }
+                            }).addTo(map);
+                        })
+                        .catch((error) => console.error(`Error loading GeoJSON from ${file.url}:`, error));
+                });
+
+
+
+
+                const umkmData = {
+                    name: "Mie jebew",
+                    rating: "4.2",
+                    reviews: [
+
+                    ],
+                    category: "makanan",
+                    buka: "Buka pukul 08:00 am · Tutup pukul 22:00 pm🔻",
+                    alamat: "Jl. Bina Karya No.40, Benteng Sel., Kec. Benteng, Kab. Kepulauan Selayar, Sulawesi Selatan 92811",
+                    phone: "",
+                    coords: [-6.1180083, 120.4642983],
+                    imageUrl: "./jebew1.jpg",
+
+                };
+
+                const marker = L.marker(umkmData.coords).addTo(map);
+
+                // Membuat konten HTML untuk popup
+                const reviewHTML = umkmData.reviews.map(review => `
+    <div class="review">
+        <h3>${review.name}</h3>
+        <span class="stars">${review.stars}</span>
+        <p class="review-date">${review.date}</p>
+        <p>${review.text}</p>
+    </div>
+`).join("");
+
+                // Menambahkan konten popup
+                marker.bindPopup(`
+    <div class="popup-container">
+        <div class="popup-header">${umkmData.name}</div>
+        <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
+        <div class="popup-category">${umkmData.category}</div>
+        <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+        <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+        <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+        <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+        <br>
+        <h1>Ulasan Pengguna</h1>
+        <div>${reviewHTML}</div>
+    </div>
+`);
+
+                // Fungsi untuk memuat GeoJSON
+                function loadGeoJSON(url, icon) {
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(geojsonData => {
+                            L.geoJSON(geojsonData, {
+                                onEachFeature: function (feature, layer) {
+                                    if (feature.properties && feature.properties.nama) {
+                                        layer.bindPopup(`${feature.properties.nama}`);
+                                    }
+                                },
+                                pointToLayer: function (feature, latlng) {
+                                    return L.marker(latlng, { icon: icon });
+                                }
+                            }).addTo(map);
+                        })
+                        .catch(error => console.error(`Error loading ${url} GeoJSON:`, error));
+                }
+            });
+
+        </script>
+</body>
+
+</html>

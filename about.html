@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mie jebew Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Link ke Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mina&family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+    * {
+        margin: 0px;
+
+        box-sizing: border-box;
+
+    }
+
+    nav {
+        position: fixed;
+        /* Tetap fixed */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        /* Z-index navbar tetap 1000 */
+    }
+
+    #sidebar {
+        position: fixed;
+        /* Pastikan sidebar fixed */
+        top: 0;
+        left: 0;
+        z-index: 2000;
+        /* Lebih tinggi dari navbar */
+        width: 64%;
+        /* Lebar sidebar */
+        height: 100%;
+        /* Full tinggi layar */
+        background-color: orange;
+        overflow-y: auto;
+        /* Tambahkan scroll jika konten panjang */
+    }
+
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .section {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #ddd;
+        margin-top: 60px;
+        padding-top: 100px;
+        /* Sesuaikan tinggi navbar */
+        padding-bottom: 50px;
+        /* Sesuaikan tinggi footer */
+    }
+
+    .container {
+        width: 80%;
+        margin: auto;
+        padding-top: 20px;
+    }
+
+    .content-section {
+        float: left;
+        width: 55%;
+    }
+
+    .image-section {
+        float: right;
+        width: 40%;
+        margin-top: 55px;
+        /* Tambahkan margin-top untuk memberikan jarak ke bawah */
+    }
+
+
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+
+    .content-section .title {
+        text-align: center;
+        /* Memusatkan tulisan */
+        font-size: 48px;
+        /* Memperbesar ukuran font */
+        font-weight: bold;
+        /* Membuat tulisan lebih tebal */
+        margin-bottom: 20px;
+        /* Memberikan jarak bawah */
+        color: #333;
+        /* Warna teks */
+    }
+
+
+    .content-section .content h3 {
+        margin-top: 20px;
+        color: #5d5d5d;
+        font-size: 1.5rem;
+    }
+
+    .content-section .content p {
+        margin-top: 10px;
+        font-family: sans-serif;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .content-section .content .button {
+        margin-top: 30px;
+    }
+
+    .content-section .content .button {
+        background-color: #3d3d3d;
+        padding: 8px 16px;
+        /* Kurangi padding agar pas dengan teks */
+        text-decoration: none;
+        color: #fff;
+        font-size: 25px;
+        letter-spacing: 1;
+        display: inline-block;
+        /* Pastikan tombol menyesuaikan ukuran teks */
+        border-radius: 4px;
+        /* Opsional: untuk sudut yang lebih halus */
+    }
+
+
+    .content-section .content .button a:hover {
+        background-color: darkorange;
+        color: #fff;
+    }
+
+    .content-section .social {
+        margin-top: 40px;
+
+    }
+
+    .content-section .social i {
+        color: red;
+        font-size: 30px;
+        padding: 0px 10px;
+    }
+
+    .content-section .social i:hover {
+        color: darkorange;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        * {
+            margin: 0px;
+
+            box-sizing: border-box;
+
+        }
+
+        .container {
+            width: 80%;
+            display: block;
+            margin: auto;
+            padding-top: 50px;
+        }
+
+        .content-section {
+            float: none;
+            width: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .image-section {
+            float: none;
+            width: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+
+        .content-section .title {
+            text-align: center;
+            font-size: 19px;
+        }
+
+        .content-section .content .button {
+            text-align: center;
+        }
+
+        .content-section .contentc .button a {
+            padding: 9px 30px;
+        }
+
+    }
+</style>
+
+<body>
+
+    <div class="flex flex-col h-full">
+        <!-- Navbar -->
+        <nav class="bg-yellow-400 shadow-md">
+            <div class=" mx-auto flex items-center justify-between px-4 py-3">
+                <h3 class="font-semibold text-2xl text-white">
+                    <em>Mie jebew</em>
+                </h3>
+                <button class="focus:outline-none lg:hidden" id="menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="65" viewBox="0 0 50 50">
+                        <path
+                            d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="hidden lg:flex lg:items-center">
+                    <a href="index.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Home</a>
+                    <a href="about.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">About</a>
+                    <a href="menu.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Menu</a>
+                    <a href="peta.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Map</a>
+                    <a href="contact.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar for Mobile -->
+        <div id="sidebar" class="fixed inset-0  z-50 hidden">
+            <div style="background-color: orange;" class="flex flex-col h-full w-64  p-4">
+                <button id="close-sidebar" class="text-white mb-4">Close</button>
+                <a href="index.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="about.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-info-circle mr-2"></i> About
+                </a>
+                <a href="menu.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-utensils mr-2"></i> Menu
+                </a>
+                <a href="peta.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-map mr-2"></i> Map
+                </a>
+                <a href="contact.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-phone mr-2"></i> Contact
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="content-section">
+                    <div class="title">
+                        <h1>Tentang Kami</h1>
+                    </div>
+                    <div class="content">
+                        <H3>Nikmati Sensasi Mie Jebew, Enaknya Kebangetan!</H3>
+                        <p>Mie Jebew menghadirkan pengalaman makan mie yang beda dari biasanya. Dengan cita rasa
+                            autentik dan bumbu spesial, setiap
+                            suapan akan membuatmu ingin tambah lagi!
+                            Buat pecinta mie sejati, Mie Jebew adalah jawabannya. Mulai dari rasa pedas yang bikin
+                            berkeringat, hingga tekstur mie
+                            yang sempurna, semuanya ada di sini!</p>
+                        <div class="button">
+                            <a href="">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                    <div class="social">
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="image-section">
+                    <img src="images/jebew.jpg">
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="bg-yellow-600 text-white text-center py-3 shadow-md">
+            <p>&copy; 2024 Website mie jebew</p>
+        </footer>
+        <script>
+
+            // JavaScript to toggle the sidebar
+            const menuToggle = document.getElementById("menu-toggle");
+            const sidebar = document.getElementById("sidebar");
+            const closeSidebar = document.getElementById("close-sidebar");
+
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("hidden");
+            });
+
+            closeSidebar.addEventListener("click", () => {
+                sidebar.classList.add("hidden");
+            });
+        </script>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mie jebew Website</title>
+
+    <!-- Link ke Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Navbar yang tetap di atas */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #FFB800;
+            /* Warna kuning cerah */
+        }
+
+        /* Menambahkan padding atas pada konten utama untuk memberi ruang pada navbar */
+        body {
+            padding-top: 60px;
+            background-color: #fff8e1;
+            /* Warna latar belakang yang lembut dan cocok dengan tema mie */
+        }
+
+        /* Footer yang tetap di bawah */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #FFB800;
+            /* Warna kuning cerah */
+            color: white;
+        }
+
+        #menu {
+            padding: 20px 0 25px 0;
+            background-color: #fff3e0;
+            /* Latar belakang luar kolom dengan warna pastel yang hangat */
+        }
+
+        #section {
+            padding: 25px 0 25px 0;
+            text-align: center;
+            font-size: 2rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: orange;
+            /* Warna merah yang sesuai dengan tema makanan */
+        }
+
+        #menu_row {
+            display: flex;
+            padding: 0 100px 0 100px;
+            background-color: #FFECB3;
+            /* Warna latar belakang luar kolom lebih lembut */
+        }
+
+        #menu_col {
+            box-shadow: 2px 2px 2px #bbb;
+            border: 1px solid #bbb;
+            background-color: #fff;
+            /* Warna latar belakang dalam kolom tetap putih */
+            margin: 10px;
+            padding: 10px;
+            flex: 1;
+        }
+
+        #menu_col h2 {
+            background-color: #FF7043;
+            /* Warna oranye untuk header kolom */
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            font-family: cursive;
+        }
+
+        #image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            padding: 5px;
+            border: 2px solid #FF5722;
+            /* Border oranye */
+        }
+
+        #image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 5px;
+        }
+
+        /* Menambah gaya untuk h3 dan h4 */
+        h3 {
+            text-align: center;
+            color: #FF5722;
+        }
+
+        h4 {
+            text-align: center;
+            color: black;
+            /* Oranye cerah sesuai tema */
+        }
+
+        @media screen and (max-width: 768px) {
+            #mobile_menu {
+                display: block;
+            }
+
+            #menu_row {
+                flex-wrap: wrap;
+                padding: 0 10px 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex flex-col h-full">
+        <!-- Navbar -->
+        <nav class="bg-yellow-400 shadow-md">
+            <div class=" mx-auto flex items-center justify-between px-4 py-3">
+                <h3 class="font-semibold text-2xl text-white">
+                    <em>Mie Jebew</em>
+                </h3>
+                <button class="focus:outline-none lg:hidden" id="menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="65" viewBox="0 0 50 50">
+                        <path
+                            d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="hidden lg:flex lg:items-center">
+                    <a href="index.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Home</a>
+                    <a href="about.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">About</a>
+                    <a href="menu.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Menu</a>
+                    <a href="peta.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Map</a>
+                    <a href="contact.html"
+                        class="hover:text-black text-white  px-3 py-2 rounded-md text-lg font-semibold">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar for Mobile -->
+        <div id="sidebar" class="fixed inset-0  z-50 hidden">
+            <div style="background-color: orange;" class="flex flex-col h-full w-64  p-4">
+                <button id="close-sidebar" class="text-white mb-4">Close</button>
+                <a href="index.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <a href="about.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-info-circle mr-2"></i> About
+                </a>
+                <a href="menu.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-utensils mr-2"></i> Menu
+                </a>
+                <a href="peta.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-map mr-2"></i> Map
+                </a>
+                <a href="contact.html"
+                    class="flex items-center text-white hover:bg-orange-600 px-3 py-2 rounded-md text-lg font-semibold">
+                    <i class="fas fa-phone mr-2"></i> Contact
+                </a>
+            </div>
+        </div>
+
+        <div id="menu">
+            <h1 id="section">Menu</h1>
+            <div id="menu_row">
+                <div id="menu_col">
+                    <h2>MAKANAN</h2>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/miejebew.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Mie Jebew Original</h3>
+                        <h4>10k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/miejebew.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Mie Jebew Level 1-2</h3>
+                        <h4>10k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/miejebew.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Mie Jebew Level 3-5</h3>
+                        <h4>15k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/indomietelur.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Indomie Telur</h3>
+                        <h4>10k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/bakmibakso.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Bakmi Ayam Bakso</h3>
+                        <h4>20k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/ayampenyet.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Nasi Ayam Penyet</h3>
+                        <h4>25k</h4>
+                    </div>
+                </div>
+                <div id="menu_col">
+                    <h2>MINUMAN</h2>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/dalgonacafe.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Dalgona caffe</h3>
+                        <h4>10k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/esmilo.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Es milo</h3>
+                        <h4>10k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/dalgonagreen.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Dalgona greentea</h3>
+                        <h4>10k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/esteh.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Es Teh</h3>
+                        <h4>5k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/popice.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Pop Ice</h3>
+                        <h4>5k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/nutrisari.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Nutrisari</h3>
+                        <h4>5k</h4>
+                    </div>
+                </div>
+                <div id="menu_col">
+                    <h2>CAMILAN & TOPING</h2>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/risolmayo1.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Risol Mayo</h3>
+                        <h4>15k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/risolayam1.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Risol Ayam Suwir</h3>
+                        <h4>15k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/wontonbasah.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Wonton Rebus</h3>
+                        <h4>15k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/wontonrebus.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Wonton Basah</h3>
+                        <h4>15k</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/telur.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Telur</h3>
+                        <h4>5k/Butir</h4>
+                    </div>
+                    <div class="box">
+                        <div id="image">
+                            <img src="images/sosis.jpg">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Sosis Jumbo</h3>
+                        <h4>5k/Butir</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Footer -->
+        <footer class="bg-yellow-600 text-white text-center py-3 shadow-md">
+            <p>&copy; 2024 Website mie jebew</p>
+        </footer>
+        <script>
+
+            // JavaScript to toggle the sidebar
+            const menuToggle = document.getElementById("menu-toggle");
+            const sidebar = document.getElementById("sidebar");
+            const closeSidebar = document.getElementById("close-sidebar");
+
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("hidden");
+            });
+
+            closeSidebar.addEventListener("click", () => {
+                sidebar.classList.add("hidden");
+            });
+        </script>
+</body>
+
+</html>
